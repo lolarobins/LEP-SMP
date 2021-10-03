@@ -1,0 +1,3 @@
+Version 1.0:
+- Created plugin - JavaPlugin class & YML File getter.
+- Swear censorship system - chat, signs, anvil.

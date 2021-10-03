@@ -1,0 +1,26 @@
+#
+# Antiswear file.
+# Standalone means they need to be on their own to be censored.
+# Contains means it needs to be within a word.
+# Very unholy list, not a personal reflection of me, thank you.
+# Many copied from bannedwordlist.com
+#
+
+standalone:
+- anal
+- anus
+- ass
+- cock
+- shit
+
+contains:
+- bitch
+- fuck
+- cunt
+- dick
+- dyke
+- fag
+- nigg
+- pussy
+- wank
+- whore
