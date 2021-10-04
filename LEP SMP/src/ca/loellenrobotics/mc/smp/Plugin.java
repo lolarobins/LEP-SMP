@@ -18,19 +18,34 @@ public class Plugin extends JavaPlugin {
 	 * onLoad - called before world is loaded.
 	 * onEnable - called after world is loaded. (Recommended, especially if hooked to other plugins as most plugins register things in their enable methods.)
 	 */
-	
 	@Override
-	public void onEnable() {
-		
+	public void onEnable() {	
 		// Pulls swears from file and stores them into memory.
 		AntiSwear.load(this);
 	
 		// Registers the listeners.
-		getServer().getPluginManager().registerEvents(new Chat(), this);
+		registerListeners();
+		
+		// Registers commands.
+		registerCommands();
 	}
+	
 	
 	@Override
 	public void onDisable() {
+		
+	}
+	
+	
+	// Registers each listener. This allows modification of events in game.
+	private void registerListeners() {
+		// #registerEvents(<class that implements Listener>, <JavaPlugin, use this>) 
+		getServer().getPluginManager().registerEvents(new Chat(), this);
+	}
+	
+	
+	// Registers each command. Must be defined in plugin.yml.
+	private void registerCommands() {
 		
 	}
 	

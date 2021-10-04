@@ -4,7 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 
-import ca.loellenrobotics.mc.smp.AntiSwear;
+import ca.loellenrobotics.mc.smp.TextReplacement;
 
 /**
  * Censors sign text.
@@ -16,7 +16,7 @@ public class Sign implements Listener {
 	public void signChange(SignChangeEvent e) {
 		
 		for(int i = 0; i < 4; i++) {
-			e.setLine(i, AntiSwear.censor(e.getLine(i)));
+			e.setLine(i, TextReplacement.parse(e.getLine(i)));
 		}
 		
 	}

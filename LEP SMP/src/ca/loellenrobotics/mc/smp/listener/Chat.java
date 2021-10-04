@@ -4,7 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import ca.loellenrobotics.mc.smp.AntiSwear;
+import ca.loellenrobotics.mc.smp.TextReplacement;
 
 
 /**
@@ -16,7 +16,7 @@ public class Chat implements Listener {
 	@EventHandler
 	public void chatEvent(AsyncPlayerChatEvent e) {
 		
-		e.setFormat(AntiSwear.censor(e.getMessage()));
+		e.setFormat(TextReplacement.parse(e.getMessage()));
 		
 	}
 	
