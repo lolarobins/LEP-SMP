@@ -1,7 +1,9 @@
 package ca.loellenrobotics.mc.smp;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -12,13 +14,20 @@ public class AntiSwear {
 	
 	private static ArrayList<String> standalone = new ArrayList<String>(), contains = new ArrayList<String>();
 	
+	
 	/**
 	 * Loads the swears into memory. Run this in onEnable.
 	 * @param plugin The plugin instance to load with.
 	 */
 	public static void load(JavaPlugin plugin) {
 		
-		DataFile swearfile = new DataFile(plugin, "swears.yml");
+		DataFile swearfile = null;
+		
+		try {
+			swearfile = new DataFile(plugin, "swears.yml");
+		} catch (IOException | InvalidConfigurationException e) {
+			e.printStackTrace();
+		}
 		
 		if (swearfile.getConfig().getStringList("standalone") != null) {
 			standalone.addAll(swearfile.getConfig().getStringList("standalone"));
@@ -29,6 +38,7 @@ public class AntiSwear {
 		}
 		
 	}
+	
 	
 	/**
 	 * Censors any text.
@@ -62,6 +72,7 @@ public class AntiSwear {
 		return censored;
 	
 	}
+	
 	
 	/**
 	 * Replaces a certain string with hashtags.

@@ -4,6 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import ca.loellenrobotics.mc.smp.Plugin;
 import ca.loellenrobotics.mc.smp.TextReplacement;
 
 
@@ -13,6 +14,13 @@ import ca.loellenrobotics.mc.smp.TextReplacement;
  */
 public class Chat implements Listener {
 
+	private final Plugin INSTANCE;
+	
+	public Chat(Plugin instance) {
+		INSTANCE = instance;
+	}
+	
+	
 	@EventHandler
 	public void chatEvent(AsyncPlayerChatEvent e) {
 		
