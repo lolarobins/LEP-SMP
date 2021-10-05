@@ -12,7 +12,7 @@ public class ColourRandomizer {
 
 	private final Color COLOUR;
 	
-	public Color getCOLOUR() {
+	public Color getColour() {
 		return COLOUR;
 	}
 	

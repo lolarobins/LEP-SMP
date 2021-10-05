@@ -69,9 +69,9 @@ public class DataFile {
 		
 		if (!FILE.exists()) {
 			FILE.getParentFile().mkdirs();
-            PLUGIN.saveResource(NAME, false);
-            if(create) FILE.createNewFile();
-            isNew = true;
+			if(create) FILE.createNewFile();
+            else PLUGIN.saveResource(NAME, false);
+			isNew = true;
 		}
 		
 		NEW = isNew;

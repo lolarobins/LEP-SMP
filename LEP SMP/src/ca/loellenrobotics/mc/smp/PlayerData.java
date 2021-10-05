@@ -1,10 +1,15 @@
 package ca.loellenrobotics.mc.smp;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+
+import com.google.common.collect.ImmutableMap;
+
+import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
 
 /**
  * Deals with player data.
@@ -14,31 +19,28 @@ import org.bukkit.configuration.InvalidConfigurationException;
 public class PlayerData {
 
 	private DataFile data;
-	private final UUID PUID;
-	private final boolean EXISTS;
+	private FileConfiguration file;
+	private String colour;
 	
-	private static HashMap<UUID, PlayerData> cached = new HashMap<UUID, PlayerData>();
+	// The defaults to add to each player.
+	private static final Map<String, Object> DEFAULTS = ImmutableMap.<String, Object>
+		builder()
+		.put("data.colour", new ColourRandomizer().getHex())
+		.build();
 	
-	PlayerData(Plugin instance, UUID uuid, boolean create) {
-		
-		boolean failed = false;
-		
+	PlayerData(Plugin instance, UUID uuid, boolean create) throws PlayerNotFoundException {
 		try {
 			data = new DataFile(instance, "player/"+uuid+".yml", create);
 		} catch (IOException | InvalidConfigurationException e) {
-			failed = true;
-		}
+			throw new PlayerNotFoundException(e.getMessage());
+		}	
 		
-		if(failed) {
-			EXISTS = false;
-			PUID = null;
-			return;
-		}
+		file = data.getConfig();
+		writeDefaults();
 		
-		else EXISTS = true;
+		// Load from file
+		colour = file.getString("data.colour");
 		
-		PUID = uuid;
-				
 	}
 	
 	
@@ -47,9 +49,10 @@ public class PlayerData {
 	 * @param instance Plugin instance (needed for internal use).
 	 * @param uuid UUID of target player.
 	 * @return The playerdata of that player.
+	 * @throws PlayerNotFoundException Throws if player file doesn't exist.
 	 */
-	public static PlayerData get(Plugin instance, UUID uuid) {
-		return get(instance, uuid, false);
+	public static PlayerData get(Plugin instance, UUID uuid) throws PlayerNotFoundException {
+		return new PlayerData(instance, uuid, false);
 	}
 	
 	
@@ -59,46 +62,42 @@ public class PlayerData {
 	 * @param uuid UUID of target player.
 	 * @param create Create file if doesn't exist.
 	 * @return The playerdata of that player.
+	 * @throws PlayerNotFoundException Throws if player file doesn't exist. (if create != true).
 	 */
-	public static PlayerData get(Plugin instance, UUID uuid, boolean create) {
-		if(!cached.containsKey(uuid)) {
-			return new PlayerData(instance, uuid, create);
-		} else {
-			return cached.get(uuid);
-		}
-	}
-
-	
-	/**
-	 * Removes player from cache (Call on reload, disconnect).
-	 */
-	public void removeFromCache() {
-		cached.remove(PUID);
-	}
+	public static PlayerData get(Plugin instance, UUID uuid, boolean create) throws PlayerNotFoundException {
+		return new PlayerData(instance, uuid, create);
+	}	
 	
 	
 	/**
-	 * Adds player to cache (Call on enable, connect).
+	 * Checks if the player is new to the server. (Only can be used on first instance called).
+	 * @return True if the player file is new.
 	 */
-	public void addToCache() {
-		cached.put(PUID, this);
-	}
-	
-	
-	/**
-	 * Checks if the playerfile exists and has loaded properly.
-	 * @return State of existence.
-	 */
-	public boolean exists() {
-		return EXISTS;
-	}
-	
-	
-	/**
-	 * Checks if the player is new to the server.
-	 * @return True if the player has joined before.
-	 */
-	public boolean hasPreviouslyJoined() {
+	public boolean firstLoaded() {
 		return !data.isNewFile();
+	}
+	
+	
+	/**
+	 * Writes defaults if they do not already exist.
+	 */
+	public void writeDefaults() {
+		
+		for(String path : DEFAULTS.keySet()) {
+			if(!file.contains(path)) {
+				file.set(path, DEFAULTS.get(path));
+			}
+		}
+		
+		data.save();
+	}
+	
+	
+	/**
+	 * Gets the colour of a player.
+	 * @return Player's colour in hex code format.
+	 */
+	public String getColourHex() {
+		return colour;
 	}
 }

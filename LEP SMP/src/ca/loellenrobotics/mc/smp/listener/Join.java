@@ -1,7 +1,10 @@
 package ca.loellenrobotics.mc.smp.listener;
 
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 
+import ca.loellenrobotics.mc.smp.Loader;
 import ca.loellenrobotics.mc.smp.Plugin;
 
 /**
@@ -15,6 +18,13 @@ public class Join implements Listener {
 	
 	public Join(Plugin instance) {
 		INSTANCE = instance;
+	}
+	
+	@EventHandler
+	public void joinEvent(PlayerJoinEvent e) {
+		
+		Loader.loadPlayer(INSTANCE, e.getPlayer().getUniqueId());
+		
 	}
 	
 
