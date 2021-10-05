@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ca.loellenrobotics.mc.smp.command.Message;
+import ca.loellenrobotics.mc.smp.command.Reply;
 import ca.loellenrobotics.mc.smp.listener.Chat;
 import ca.loellenrobotics.mc.smp.listener.Join;
 import ca.loellenrobotics.mc.smp.listener.Sign;
@@ -41,12 +43,6 @@ public class Plugin extends JavaPlugin {
 	}
 	
 	
-	@Override
-	public void onDisable() {
-		
-	}
-	
-	
 	// Registers each listener. This allows modification of events in game.
 	private void registerListeners() {
 		// #registerEvents(<class that implements Listener>, <JavaPlugin, use this>) 
@@ -58,7 +54,9 @@ public class Plugin extends JavaPlugin {
 	
 	// Registers each command. Must be defined in plugin.yml.
 	private void registerCommands() {
-		
+		// #getCommand("<command name in plugin.yml>").setExecutor(<class that implements CommandExecutor>)
+		getCommand("message").setExecutor(new Message(this));
+		getCommand("reply").setExecutor(new Reply(this));
 	}
 	
 }
