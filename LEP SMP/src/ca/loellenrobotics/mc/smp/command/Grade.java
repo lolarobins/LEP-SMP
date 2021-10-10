@@ -42,7 +42,7 @@ public class Grade implements CommandExecutor{
 			
 			PlayerData data = PlayerData.get(INSTANCE, p.getUniqueId());
 			data.setGrade(grade);
-			if(grade != 0) p.sendMessage(ChatColor.GREEN + "Grade set to " + grade);
+			if(grade != 0) p.sendMessage(ChatColor.GREEN + "Your grade set to " + grade);
 			else p.sendMessage(ChatColor.GREEN + "Your grade has been reset");
 			
 		} catch (NumberFormatException e) {
