@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import ca.loellenrobotics.mc.smp.PlayerData;
-import ca.loellenrobotics.mc.smp.Plugin;
+import ca.loellenrobotics.mc.smp.SMPPlugin;
 import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
 import net.md_5.bungee.api.ChatColor;
 
@@ -18,9 +18,9 @@ import net.md_5.bungee.api.ChatColor;
  */
 public class Me implements CommandExecutor {
 
-	final Plugin INSTANCE;
+	final SMPPlugin INSTANCE;
 	
-	public Me(Plugin instance) {
+	public Me(SMPPlugin instance) {
 		INSTANCE = instance;
 	}
 	
@@ -28,7 +28,7 @@ public class Me implements CommandExecutor {
 	public boolean onCommand(CommandSender s, Command c, String l, String[] args) {
 		
 		if(args.length == 0) {
-			s.sendMessage("§7» §cPlease enter a message.");
+			s.sendMessage("§cPlease enter a message.");
 			return true;
 		}
 		

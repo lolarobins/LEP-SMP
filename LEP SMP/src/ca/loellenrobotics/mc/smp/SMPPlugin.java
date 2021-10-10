@@ -9,6 +9,7 @@ import ca.loellenrobotics.mc.smp.command.Message;
 import ca.loellenrobotics.mc.smp.command.Reply;
 import ca.loellenrobotics.mc.smp.listener.Chat;
 import ca.loellenrobotics.mc.smp.listener.Join;
+import ca.loellenrobotics.mc.smp.listener.Leave;
 import ca.loellenrobotics.mc.smp.listener.ServerList;
 import ca.loellenrobotics.mc.smp.listener.Sign;
 
@@ -17,7 +18,7 @@ import ca.loellenrobotics.mc.smp.listener.Sign;
  * @author Liam Robins
  *
  */
-public class Plugin extends JavaPlugin {
+public class SMPPlugin extends JavaPlugin {
 	
 	/*
 	 * This class file is the API's 'point of contact' when loading the plugin from the /plugins directory.
@@ -52,6 +53,7 @@ public class Plugin extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Join(this), this);
 		getServer().getPluginManager().registerEvents(new Sign(), this);
 		getServer().getPluginManager().registerEvents(new ServerList(), this);
+		getServer().getPluginManager().registerEvents(new Leave(this), this);
 	}
 	
 	

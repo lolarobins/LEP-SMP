@@ -5,7 +5,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import ca.loellenrobotics.mc.smp.Loader;
-import ca.loellenrobotics.mc.smp.Plugin;
+import ca.loellenrobotics.mc.smp.PlayerData;
+import ca.loellenrobotics.mc.smp.SMPPlugin;
+import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
+import net.md_5.bungee.api.ChatColor;
 
 /**
  * Handles player stuff when they join.
@@ -14,9 +17,9 @@ import ca.loellenrobotics.mc.smp.Plugin;
  */
 public class Join implements Listener {
 	
-	private final Plugin INSTANCE;
+	private final SMPPlugin INSTANCE;
 	
-	public Join(Plugin instance) {
+	public Join(SMPPlugin instance) {
 		INSTANCE = instance;
 	}
 	
@@ -24,6 +27,13 @@ public class Join implements Listener {
 	public void joinEvent(PlayerJoinEvent e) {
 		
 		Loader.loadPlayer(INSTANCE, e.getPlayer().getUniqueId());
+		
+		try {
+			e.setJoinMessage(ChatColor.of(PlayerData.get(INSTANCE, e.getPlayer().getUniqueId()).getColourHex()) + 
+					e.getPlayer().getName() + ChatColor.RESET + "" + ChatColor.GRAY + " joined the game");
+		} catch (PlayerNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		
 	}
 	

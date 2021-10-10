@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import ca.loellenrobotics.mc.smp.PlayerData;
-import ca.loellenrobotics.mc.smp.Plugin;
+import ca.loellenrobotics.mc.smp.SMPPlugin;
 import ca.loellenrobotics.mc.smp.TextReplacement;
 import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
 import net.md_5.bungee.api.ChatColor;
@@ -21,9 +21,9 @@ import net.md_5.bungee.api.ChatColor;
  */
 public class Message implements CommandExecutor {
 
-	private final Plugin INSTANCE;
+	private final SMPPlugin INSTANCE;
 	
-	public Message(Plugin instance) {
+	public Message(SMPPlugin instance) {
 		INSTANCE = instance;
 	}
 	
@@ -35,7 +35,7 @@ public class Message implements CommandExecutor {
 
 		// If no player is specified
 		if(args.length == 0) {
-			s.sendMessage("§7» §cPlease specify a player.");
+			s.sendMessage("§cPlease specify a player to message.");
 			return true;
 		}
 		
@@ -44,13 +44,13 @@ public class Message implements CommandExecutor {
 		
 		// If the player isn't online or recognized
 		if(t == null) {
-			s.sendMessage("§7» §cPlayer not recognized.");
+			s.sendMessage("§cPlayer not found.");
 			return true;
 		}
 		
 		// If no message is written
 		if(args.length == 1) {
-			s.sendMessage("§7» §cPlease enter a message.");
+			s.sendMessage("§cPlease enter a message.");
 			return true;
 		}
 		

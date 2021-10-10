@@ -1,7 +1,7 @@
-main: ca.loellenrobotics.mc.smp.Plugin
+main: ca.loellenrobotics.mc.smp.SMPPlugin
 name: LEPSS-SMP
 authors: [LEP EDIT]
-version: 1.0
+version: 1.0.0
 api-version: 1.17
 description: SMP Plugin for LEPSS.
 commands:

@@ -75,7 +75,7 @@ public class AntiSwear {
 	
 	
 	/**
-	 * Replaces a certain string with hashtags.
+	 * Replaces a certain string with hashtags. (Replaced with stars)
 	 * @param string String to replace.
 	 * @return a string with hashtags replacing all characters, including spaces.
 	 */
@@ -84,7 +84,7 @@ public class AntiSwear {
 		String tags = "";
 		
 		for(int i=0; i < string.length(); i++) {
-			tags=tags+"#";
+			tags=tags+"*";
 		}
 		
 		return tags;

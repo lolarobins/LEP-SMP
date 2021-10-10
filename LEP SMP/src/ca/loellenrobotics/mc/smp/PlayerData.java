@@ -28,7 +28,7 @@ public class PlayerData {
 		.put("data.colour", new ColourRandomizer().getHex())
 		.build();
 	
-	PlayerData(Plugin instance, UUID uuid, boolean create) throws PlayerNotFoundException {
+	PlayerData(SMPPlugin instance, UUID uuid, boolean create) throws PlayerNotFoundException {
 		try {
 			data = new DataFile(instance, "player/"+uuid+".yml", create);
 		} catch (IOException | InvalidConfigurationException e) {
@@ -51,7 +51,7 @@ public class PlayerData {
 	 * @return The playerdata of that player.
 	 * @throws PlayerNotFoundException Throws if player file doesn't exist.
 	 */
-	public static PlayerData get(Plugin instance, UUID uuid) throws PlayerNotFoundException {
+	public static PlayerData get(SMPPlugin instance, UUID uuid) throws PlayerNotFoundException {
 		return new PlayerData(instance, uuid, false);
 	}
 	
@@ -64,7 +64,7 @@ public class PlayerData {
 	 * @return The playerdata of that player.
 	 * @throws PlayerNotFoundException Throws if player file doesn't exist. (if create != true).
 	 */
-	public static PlayerData get(Plugin instance, UUID uuid, boolean create) throws PlayerNotFoundException {
+	public static PlayerData get(SMPPlugin instance, UUID uuid, boolean create) throws PlayerNotFoundException {
 		return new PlayerData(instance, uuid, create);
 	}	
 	

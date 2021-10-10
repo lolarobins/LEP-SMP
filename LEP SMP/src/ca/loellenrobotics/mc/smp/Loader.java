@@ -20,7 +20,7 @@ public class Loader {
 	 * @param instance The instance of the plugin.
 	 * @param player The player.
 	 */
-	public static void loadPlayer(Plugin instance, UUID player) {
+	public static void loadPlayer(SMPPlugin instance, UUID player) {
 		
 		try {
 			
@@ -41,7 +41,7 @@ public class Loader {
 		
 	}
 	
-	public static void unloadPlayer(Plugin instance, UUID player) {
+	public static void unloadPlayer(SMPPlugin instance, UUID player) {
 		
 	}
 	
