@@ -4,9 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ca.loellenrobotics.mc.smp.command.Grade;
 import ca.loellenrobotics.mc.smp.command.Me;
 import ca.loellenrobotics.mc.smp.command.Message;
+import ca.loellenrobotics.mc.smp.command.Name;
 import ca.loellenrobotics.mc.smp.command.Reply;
+import ca.loellenrobotics.mc.smp.command.School;
 import ca.loellenrobotics.mc.smp.listener.Chat;
 import ca.loellenrobotics.mc.smp.listener.Join;
 import ca.loellenrobotics.mc.smp.listener.Leave;
@@ -63,6 +66,9 @@ public class SMPPlugin extends JavaPlugin {
 		getCommand("message").setExecutor(new Message(this));
 		getCommand("reply").setExecutor(new Reply(this));
 		getCommand("me").setExecutor(new Me(this));
+		getCommand("name").setExecutor(new Name(this));
+		getCommand("school").setExecutor(new School(this));
+		getCommand("grade").setExecutor(new Grade(this));
 	}
 	
 }

@@ -13,4 +13,9 @@ commands:
       aliases: [r]
    me:
       description: Describe an action.
-
+   name:
+      description: Set your real-life name.
+   grade:
+      description: Set your grade.
+   school:
+      description: Set your school (non-LEP students).

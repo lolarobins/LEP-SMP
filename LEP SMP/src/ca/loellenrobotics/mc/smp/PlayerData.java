@@ -20,12 +20,16 @@ public class PlayerData {
 
 	private DataFile data;
 	private FileConfiguration file;
-	private String colour;
+	private String colour, name, school;
+	private int grade;
 	
 	// The defaults to add to each player.
 	private static final Map<String, Object> DEFAULTS = ImmutableMap.<String, Object>
 		builder()
 		.put("data.colour", new ColourRandomizer().getHex())
+		.put("data.name", "")
+		.put("data.school", "")
+		.put("data.grade", 0)
 		.build();
 	
 	PlayerData(SMPPlugin instance, UUID uuid, boolean create) throws PlayerNotFoundException {
@@ -40,6 +44,9 @@ public class PlayerData {
 		
 		// Load from file
 		colour = file.getString("data.colour");
+		name = file.getString("data.name");
+		school = file.getString("data.school");
+		grade = file.getInt("data.grade");
 		
 	}
 	
@@ -94,10 +101,72 @@ public class PlayerData {
 	
 	
 	/**
+	 * Sets the name of a player
+	 * @param name The name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+		file.set("data.name", name);
+		data.save();
+	}
+	
+	
+	/**
+	 * Sets the school the player goes to
+	 * @param school School name
+	 */
+	public void setSchool(String school) {
+		this.school = school;
+		file.set("data.school", school);
+		data.save();
+	}
+	
+	
+	/**
+	 * Sets the grade of a player
+	 * @param grade The grade to set
+	 */
+	public void setGrade(int grade) {
+		this.grade = grade;
+		file.set("data.grade", grade);
+		data.save();
+	}
+	
+	
+	/**
 	 * Gets the colour of a player.
 	 * @return Player's colour in hex code format.
 	 */
 	public String getColourHex() {
 		return colour;
+	}
+	
+	
+	/**
+	 * Gets the player's set name.
+	 * @return Player's real name.
+	 */
+	public String getName() {
+		if(name.isEmpty()) return null;
+		return name;
+	}
+	
+	
+	/**
+	 * Gets the school the player goes to
+	 * @return The school's name
+	 */
+	public String getSchool() {
+		if(school.isEmpty()) return null;
+		return school;
+	}
+	
+	
+	/**
+	 * Gets the players grade
+	 * @return Grade, 0 if not set or reset.
+	 */
+	public int getGrade() {
+		return grade;
 	}
 }
