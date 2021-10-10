@@ -2,7 +2,11 @@ package ca.loellenrobotics.mc.smp;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
+import net.md_5.bungee.api.ChatColor;
 
 /**
  * Loads stuff. Preferred doing it here rather than repeating myself in other spots.
@@ -24,6 +28,11 @@ public class Loader {
 			
 			if(data.firstLoaded()) {
 				
+			}
+			
+			if(Bukkit.getPlayer(player) != null) {
+				Player p = Bukkit.getPlayer(player);
+				p.setPlayerListName(ChatColor.of(data.getColourHex()) + p.getName());
 			}
 			
 		} catch (PlayerNotFoundException e) {

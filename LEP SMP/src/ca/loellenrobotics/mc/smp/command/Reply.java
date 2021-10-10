@@ -72,7 +72,7 @@ public class Reply implements CommandExecutor {
 		// Sends the message
 		try {
 			
-			String format = ChatColor.of(senderColour) + s.getName()+" §r§7>§r "+ChatColor.of(PlayerData.get(INSTANCE, t.getUniqueId()).getColourHex()) + t.getName() + "§r§8:§r" + msgToSend;
+			String format = ChatColor.of(senderColour) + s.getName()+" §r§7>§r "+ChatColor.of(PlayerData.get(INSTANCE, t.getUniqueId()).getColourHex()) + t.getName() + "§r§8:§r " + msgToSend;
 			s.sendMessage(format);
 			t.sendMessage(format);
 			

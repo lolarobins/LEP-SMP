@@ -4,10 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ca.loellenrobotics.mc.smp.command.Me;
 import ca.loellenrobotics.mc.smp.command.Message;
 import ca.loellenrobotics.mc.smp.command.Reply;
 import ca.loellenrobotics.mc.smp.listener.Chat;
 import ca.loellenrobotics.mc.smp.listener.Join;
+import ca.loellenrobotics.mc.smp.listener.ServerList;
 import ca.loellenrobotics.mc.smp.listener.Sign;
 
 /**
@@ -49,6 +51,7 @@ public class Plugin extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Chat(this), this);
 		getServer().getPluginManager().registerEvents(new Join(this), this);
 		getServer().getPluginManager().registerEvents(new Sign(), this);
+		getServer().getPluginManager().registerEvents(new ServerList(), this);
 	}
 	
 	
@@ -57,6 +60,7 @@ public class Plugin extends JavaPlugin {
 		// #getCommand("<command name in plugin.yml>").setExecutor(<class that implements CommandExecutor>)
 		getCommand("message").setExecutor(new Message(this));
 		getCommand("reply").setExecutor(new Reply(this));
+		getCommand("me").setExecutor(new Me(this));
 	}
 	
 }

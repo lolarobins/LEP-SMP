@@ -4,4 +4,13 @@ authors: [LEP EDIT]
 version: 1.0
 api-version: 1.17
 description: SMP Plugin for LEPSS.
+commands:
+   message:
+      description: Message another player.
+      aliases: [msg, tell, whisper, w]
+   reply:
+      description: Send a reply to the last person messaged.
+      aliases: [r]
+   me:
+      description: Describe an action.
 
