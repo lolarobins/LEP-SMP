@@ -53,7 +53,7 @@ public class AntiSwear {
 		if(!contains.isEmpty()) {
 			for(String str : string.split(" ")) {
 				for(String str2 : contains) {
-					if(str.contains(str2)) {
+					if(str.toLowerCase().contains(str2)) {
 						censored = censored.replaceAll(str, tag(str));
 					}
 				}

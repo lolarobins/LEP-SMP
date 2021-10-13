@@ -24,7 +24,7 @@ public class PlayerData {
 	private int grade;
 	
 	// The defaults to add to each player.
-	private static final Map<String, Object> DEFAULTS = ImmutableMap.<String, Object>
+	private final Map<String, Object> DEFAULTS = ImmutableMap.<String, Object>
 		builder()
 		.put("data.colour", new ColourRandomizer().getHex())
 		.put("data.name", "")
