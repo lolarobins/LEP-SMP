@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ca.loellenrobotics.mc.smp.command.Colour;
 import ca.loellenrobotics.mc.smp.command.Grade;
 import ca.loellenrobotics.mc.smp.command.Me;
 import ca.loellenrobotics.mc.smp.command.Message;
@@ -46,6 +47,9 @@ public class SMPPlugin extends JavaPlugin {
 		for(Player player : Bukkit.getOnlinePlayers()) {
 			Loader.loadPlayer(this, player.getUniqueId());
 		}
+		
+		// Updates tab list & others.
+		Updater.run(this);
 	}
 	
 	
@@ -69,6 +73,7 @@ public class SMPPlugin extends JavaPlugin {
 		getCommand("name").setExecutor(new Name(this));
 		getCommand("school").setExecutor(new School(this));
 		getCommand("grade").setExecutor(new Grade(this));
+		getCommand("colour").setExecutor(new Colour(this));
 	}
 	
 }

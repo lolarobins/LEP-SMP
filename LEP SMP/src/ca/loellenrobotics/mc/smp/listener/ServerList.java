@@ -15,8 +15,8 @@ public class ServerList implements Listener {
 
 	@EventHandler
 	public void list(ServerListPingEvent e) {
-		e.setMotd(ChatColor.of("#7400ad") + "" + "Lo-Ellen Park SMP\n"
-				+ ChatColor.of("#dec612") + "1.17.1");
+		e.setMotd(ChatColor.LIGHT_PURPLE + "" + "Lo-Ellen Park SMP\n"
+				+ ChatColor.YELLOW + "1.17.1");
 	}
 	
 }

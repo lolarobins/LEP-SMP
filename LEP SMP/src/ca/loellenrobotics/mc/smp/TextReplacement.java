@@ -12,4 +12,8 @@ public final class TextReplacement {
 		return string;
 	}
 	
+	public static String lightParse(String string) {
+		return AntiSwear.censor(string);
+	}
+	
 }

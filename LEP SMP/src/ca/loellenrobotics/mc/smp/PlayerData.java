@@ -3,6 +3,7 @@ package ca.loellenrobotics.mc.smp;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -130,6 +131,14 @@ public class PlayerData {
 		this.grade = grade;
 		file.set("data.grade", grade);
 		data.save();
+	}
+	
+	
+	public void setColourHex(String colourCode) {
+        if(!Pattern.compile("^#([a-fA-F0-9]{6})$").matcher(colourCode).matches()) throw new IllegalArgumentException("");
+        this.colour = colourCode;
+        file.set("data.colour", colourCode);
+        data.save();
 	}
 	
 	

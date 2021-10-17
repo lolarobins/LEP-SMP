@@ -1,13 +1,13 @@
 main: ca.loellenrobotics.mc.smp.SMPPlugin
 name: LEPSS-SMP
 authors: [LEP EDIT]
-version: 1.0.0
+version: 1.1.0
 api-version: 1.17
 description: SMP Plugin for LEPSS.
 commands:
    message:
       description: Message another player.
-      aliases: [msg, tell, whisper, w]
+      aliases: [msg, tell, whisper, w, pm]
    reply:
       description: Send a reply to the last person messaged.
       aliases: [r]
@@ -19,3 +19,6 @@ commands:
       description: Set your grade.
    school:
       description: Set your school (non-LEP students).
+   colour:
+      description: Set the colour of your name.
+      aliases: [color]
