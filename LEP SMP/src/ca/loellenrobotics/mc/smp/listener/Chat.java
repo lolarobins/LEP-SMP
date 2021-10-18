@@ -9,7 +9,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import ca.loellenrobotics.mc.smp.PlayerData;
 import ca.loellenrobotics.mc.smp.SMPPlugin;
 import ca.loellenrobotics.mc.smp.TextReplacement;
-import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
+import ca.loellenrobotics.mc.smp.exception.PlayerException;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -77,7 +77,7 @@ public class Chat implements Listener {
 			
 			return name;
 			
-		} catch (PlayerNotFoundException e) {
+		} catch (PlayerException e) {
 			e.printStackTrace();
 			return null;
 		}

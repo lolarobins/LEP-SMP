@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 import ca.loellenrobotics.mc.smp.PlayerData;
 import ca.loellenrobotics.mc.smp.SMPPlugin;
-import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
+import ca.loellenrobotics.mc.smp.exception.PlayerException;
 import net.md_5.bungee.api.ChatColor;
 
 /**
@@ -47,7 +47,7 @@ public class Grade implements CommandExecutor{
 			
 		} catch (NumberFormatException e) {
 			p.sendMessage(ChatColor.RED + "Invalid grade entered. Must be in range of 7-13.");
-		} catch (PlayerNotFoundException e) {
+		} catch (PlayerException e) {
 			e.printStackTrace();
 		}
 		

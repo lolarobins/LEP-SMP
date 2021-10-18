@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import ca.loellenrobotics.mc.smp.PlayerData;
 import ca.loellenrobotics.mc.smp.SMPPlugin;
 import ca.loellenrobotics.mc.smp.TextReplacement;
-import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
+import ca.loellenrobotics.mc.smp.exception.PlayerException;
 import net.md_5.bungee.api.ChatColor;
 
 /**
@@ -64,7 +64,7 @@ public class Reply implements CommandExecutor {
 			
 			try {
 				senderColour = PlayerData.get(INSTANCE, p.getUniqueId()).getColourHex();
-			} catch (PlayerNotFoundException e) {
+			} catch (PlayerException e) {
 				e.printStackTrace();
 			}
 		}
@@ -79,7 +79,7 @@ public class Reply implements CommandExecutor {
 			Message.lastReply.put(s.getName(), t.getName());
 			Message.lastReply.put(t.getName(), s.getName());
 			
-		} catch (PlayerNotFoundException e) {
+		} catch (PlayerException e) {
 			e.printStackTrace();
 		}
 		

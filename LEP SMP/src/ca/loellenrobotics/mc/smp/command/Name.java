@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import ca.loellenrobotics.mc.smp.PlayerData;
 import ca.loellenrobotics.mc.smp.SMPPlugin;
-import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
+import ca.loellenrobotics.mc.smp.exception.PlayerException;
 import net.md_5.bungee.api.ChatColor;
 
 /**
@@ -54,7 +54,7 @@ public class Name implements CommandExecutor {
 			data.setName(name);
 			p.sendMessage(ChatColor.GREEN + "Your name has been set to " + name);
 			
-		} catch (PlayerNotFoundException e) {
+		} catch (PlayerException e) {
 			e.printStackTrace();
 		}
 		

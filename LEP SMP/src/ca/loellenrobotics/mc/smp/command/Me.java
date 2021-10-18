@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import ca.loellenrobotics.mc.smp.PlayerData;
 import ca.loellenrobotics.mc.smp.SMPPlugin;
-import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
+import ca.loellenrobotics.mc.smp.exception.PlayerException;
 import net.md_5.bungee.api.ChatColor;
 
 /**
@@ -38,7 +38,7 @@ public class Me implements CommandExecutor {
 		}else {
 			try {
 				colour = PlayerData.get(INSTANCE, ((Player) s).getUniqueId()).getColourHex();
-			} catch (PlayerNotFoundException e) {
+			} catch (PlayerException e) {
 				colour = "#FF0000";
 			}
 		}

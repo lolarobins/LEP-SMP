@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import ca.loellenrobotics.mc.smp.ColourRandomizer;
 import ca.loellenrobotics.mc.smp.PlayerData;
 import ca.loellenrobotics.mc.smp.SMPPlugin;
-import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
+import ca.loellenrobotics.mc.smp.exception.PlayerException;
 import net.md_5.bungee.api.ChatColor;
 
 /**
@@ -51,7 +51,7 @@ public class Colour implements CommandExecutor {
 			data.setColourHex(args[0]);
 			s.sendMessage(ChatColor.GREEN + "Your name colour has been set to " + ChatColor.of(data.getColourHex()) + data.getColourHex() + ChatColor.GREEN + ".");
 			
-		} catch (PlayerNotFoundException e) {
+		} catch (PlayerException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			s.sendMessage(ChatColor.RED + "Invalid colour format. Valid hex code must be in format '#HEXCDE'.");

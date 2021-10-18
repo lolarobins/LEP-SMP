@@ -3,7 +3,7 @@ package ca.loellenrobotics.mc.smp;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
+import ca.loellenrobotics.mc.smp.exception.PlayerException;
 import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.MinecraftServer;
 
@@ -21,7 +21,7 @@ public class Updater {
 			public void run() {
 				try {
 					new Updater(instance);
-				} catch (PlayerNotFoundException e) {
+				} catch (PlayerException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -30,7 +30,7 @@ public class Updater {
 		}, 10, 20);
 	}
 
-	public Updater(SMPPlugin instance) throws PlayerNotFoundException {
+	public Updater(SMPPlugin instance) throws PlayerException {
 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			PlayerData data = PlayerData.get(instance, p.getUniqueId());

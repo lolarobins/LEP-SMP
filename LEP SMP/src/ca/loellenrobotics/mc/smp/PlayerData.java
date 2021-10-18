@@ -10,7 +10,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import com.google.common.collect.ImmutableMap;
 
-import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
+import ca.loellenrobotics.mc.smp.exception.PlayerException;
 
 /**
  * Deals with player data.
@@ -23,7 +23,9 @@ public class PlayerData {
 	private FileConfiguration file;
 	private String colour, name, school, teamid;
 	private TeamData team;
+	private final UUID UID;
 	private int grade;
+	private final SMPPlugin INSTANCE;
 	
 	// The defaults to add to each player.
 	private final Map<String, Object> DEFAULTS = ImmutableMap.<String, Object>
@@ -35,11 +37,14 @@ public class PlayerData {
 		.put("data.team", "")
 		.build();
 	
-	PlayerData(SMPPlugin instance, UUID uuid, boolean create) throws PlayerNotFoundException {
+	PlayerData(SMPPlugin instance, UUID uuid, boolean create) throws PlayerException {
+		INSTANCE = instance;
+		UID = uuid;
+		
 		try {
 			data = new DataFile(instance, "player/"+uuid+".yml", create);
 		} catch (IOException | InvalidConfigurationException e) {
-			throw new PlayerNotFoundException(e.getMessage());
+			throw new PlayerException(e.getMessage());
 		}	
 		
 		file = data.getConfig();
@@ -51,7 +56,7 @@ public class PlayerData {
 		school = file.getString("data.school");
 		grade = file.getInt("data.grade");
 		teamid = file.getString("data.team");
-		team = TeamData.get(teamid);
+		team = TeamData.get(instance, teamid);
 		
 	}
 	
@@ -61,9 +66,9 @@ public class PlayerData {
 	 * @param instance Plugin instance (needed for internal use).
 	 * @param uuid UUID of target player.
 	 * @return The playerdata of that player.
-	 * @throws PlayerNotFoundException Throws if player file doesn't exist.
+	 * @throws PlayerException Throws if player file doesn't exist.
 	 */
-	public static PlayerData get(SMPPlugin instance, UUID uuid) throws PlayerNotFoundException {
+	public static PlayerData get(SMPPlugin instance, UUID uuid) throws PlayerException {
 		return new PlayerData(instance, uuid, false);
 	}
 	
@@ -74,9 +79,9 @@ public class PlayerData {
 	 * @param uuid UUID of target player.
 	 * @param create Create file if doesn't exist.
 	 * @return The playerdata of that player.
-	 * @throws PlayerNotFoundException Throws if player file doesn't exist. (if create != true).
+	 * @throws PlayerException Throws if player file doesn't exist. (if create != true).
 	 */
-	public static PlayerData get(SMPPlugin instance, UUID uuid, boolean create) throws PlayerNotFoundException {
+	public static PlayerData get(SMPPlugin instance, UUID uuid, boolean create) throws PlayerException {
 		return new PlayerData(instance, uuid, create);
 	}	
 	
@@ -160,7 +165,7 @@ public class PlayerData {
 	 * @param colourCode Hex code #000000
 	 */
 	public void setColourHex(String colourCode) {
-        if(!Pattern.compile("^#([a-fA-F0-9]{6})$").matcher(colourCode).matches()) throw new IllegalArgumentException("");
+        if(!Pattern.compile("^#([a-fA-F0-9]{6})$").matcher(colourCode).matches()) throw new IllegalArgumentException("Invalid Hex Colour");
         this.colour = colourCode;
         file.set("data.colour", colourCode);
         data.save();
@@ -196,6 +201,11 @@ public class PlayerData {
 	}
 	
 	
+	public UUID getPlayerUUID() {
+		return UID;
+	}
+	
+	
 	/**
 	 * Gets the players grade
 	 * @return Grade, 0 if not set or reset.
@@ -210,6 +220,7 @@ public class PlayerData {
 	 * @return Team ID
 	 */
 	public String getTeamID() {
+		if(TeamData.get(INSTANCE, teamid) == null) return null;
 		return teamid;
 	}
 	
@@ -219,6 +230,6 @@ public class PlayerData {
 	 * @return The team.
 	 */
 	public TeamData getTeam() {
-		return team;
+		return TeamData.get(INSTANCE, teamid);
 	}
 }

@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import ca.loellenrobotics.mc.smp.PlayerData;
 import ca.loellenrobotics.mc.smp.SMPPlugin;
-import ca.loellenrobotics.mc.smp.exception.PlayerNotFoundException;
+import ca.loellenrobotics.mc.smp.exception.PlayerException;
 import net.md_5.bungee.api.ChatColor;
 
 /**
@@ -28,7 +28,7 @@ public class Leave implements Listener {
 		try {
 			e.setQuitMessage(ChatColor.of(PlayerData.get(INSTANCE, e.getPlayer().getUniqueId()).getColourHex()) + 
 					e.getPlayer().getName() + ChatColor.RESET + "" + ChatColor.GRAY + " left the game");
-		} catch (PlayerNotFoundException e1) {
+		} catch (PlayerException e1) {
 			e1.printStackTrace();
 		}
 		
