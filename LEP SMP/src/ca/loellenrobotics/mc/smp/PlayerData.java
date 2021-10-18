@@ -21,7 +21,8 @@ public class PlayerData {
 
 	private DataFile data;
 	private FileConfiguration file;
-	private String colour, name, school;
+	private String colour, name, school, teamid;
+	private TeamData team;
 	private int grade;
 	
 	// The defaults to add to each player.
@@ -31,6 +32,7 @@ public class PlayerData {
 		.put("data.name", "")
 		.put("data.school", "")
 		.put("data.grade", 0)
+		.put("data.team", "")
 		.build();
 	
 	PlayerData(SMPPlugin instance, UUID uuid, boolean create) throws PlayerNotFoundException {
@@ -48,6 +50,8 @@ public class PlayerData {
 		name = file.getString("data.name");
 		school = file.getString("data.school");
 		grade = file.getInt("data.grade");
+		teamid = file.getString("data.team");
+		team = TeamData.get(teamid);
 		
 	}
 	
@@ -134,6 +138,27 @@ public class PlayerData {
 	}
 	
 	
+	/**
+	 * Sets the team of a player.
+	 * @param team Team to set.
+	 */
+	public void setTeam(TeamData team) {
+		this.team = team;
+	}
+	
+	
+	/**
+	 * Removes a player from a team.
+	 */
+	public void removeTeam() {
+		if(team == null) return;
+	}
+	
+	
+	/**
+	 * Sets the hex colour for the player's name.
+	 * @param colourCode Hex code #000000
+	 */
 	public void setColourHex(String colourCode) {
         if(!Pattern.compile("^#([a-fA-F0-9]{6})$").matcher(colourCode).matches()) throw new IllegalArgumentException("");
         this.colour = colourCode;
@@ -177,5 +202,23 @@ public class PlayerData {
 	 */
 	public int getGrade() {
 		return grade;
+	}
+	
+	
+	/**
+	 * Gets the ID of a players team. Empty string if none.
+	 * @return Team ID
+	 */
+	public String getTeamID() {
+		return teamid;
+	}
+	
+	
+	/**
+	 * Gets the team the player is on.
+	 * @return The team.
+	 */
+	public TeamData getTeam() {
+		return team;
 	}
 }
